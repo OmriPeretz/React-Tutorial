@@ -1,10 +1,7 @@
-/*jshint esversion: 6 */
-
-import _ from 'lodash';
 
 /**
- * 
- * @param {string} ename 
+ *
+ * @param {string} ename
  */
 export const getEnameMembers = (ename) => {
 
@@ -14,17 +11,6 @@ export const getEnameMembers = (ename) => {
         compName,
         empName
     };
-};
-
-
-export const getNameByEname = (ename) => {
-
-    return getEnameMembers(ename).empName;
-};
-
-export const getcompNameByEname = (ename) => {
-
-    return getEnameMembers(ename).compName;
 };
 
 export const enameGenerator = (name, compName) => {

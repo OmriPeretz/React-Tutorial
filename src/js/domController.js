@@ -1,69 +1,88 @@
-      /*jshint esversion: 6 */
+/*jshint esversion: 6 */
 
+import {default as $} from "jquery";
+import _ from 'lodash';
+import {enameGenerator as EnameGenerator} from './utils.js';
+import {
+    uiPath as UiPath,
+    classes as Classes,
+    enameProps as EnameProps,
+    uiIds as UiIds
+} from './consts';
 
-      import {
-            uiPath as UiPath,
-            classes as Classes
-      } from './consts';
+import {createEmployee as CreateEmployee} from './main';
 
-      let instance = null;
+// Singleton class
+export default class DomController {
+    static staticConstructor() {
 
-      class DomController {
-            constructor() {
+        document.addEventListener("DOMContentLoaded", () => {
 
-                  // Creates the singleton
-                  if (!instance) {
+            // Assign onclick func
+            $(UiPath.addEmpBtn).click(() => this.onAddEmployee());
+        });
+    }
 
-                        instance = this;
-                        instance.loaded = false;
+    static _domReady(){
+        return Promise.resolve($.when($.ready));
+    }
 
+    static printEmployee(emp) {
 
-                      document.addEventListener("DOMContentLoaded", () => {
-                          instance.loaded = true;
-                      });
+        this._domReady().then(()=>{
+            if (emp.constructor.name !== Classes.emp)
+                throw "can add only employees";
 
-                        while(!instance.loaded) {
+            const empRow = this._generateEmpsTableRow(emp);
+            this._insertEmployeeToTable(empRow);
+        });
+    }
 
-                        }
-                  }
+    static printEmployees(empsArray) {
+        empsArray.forEach(emp => this.printEmployee(emp));
+    }
 
-                  return instance;
-            }
+    static _insertEmployeeToTable(empRow) {
 
-            isDomReady() {
-                  if (!instance.loaded)
-                        throw "dom is not ready";
+        $(UiPath.tbody).append(empRow);
+    }
 
-                  return instance.loaded;
-            }
+    static _generateEmpsTableRow(emp) {
 
-            printEmployee(emp) {
+        return `<tr><td>${emp.name}</td><td>${emp.salary}</td><td>${emp.company.name}</td><td>${emp.gender}</td></tr>`;
+    }
 
-                  instance.isDomReady();
+    static _clearForm() {
 
-                  if (employee.constructor.name !== Classes.emp)
-                        throw "can add only employees";
+        // iterate threw the fields and clear them
+        UiIds.forEach(fName => $(`#${fName}`).val(''));
+    }
 
-                  const empRow = instance._generateEmpsTableRow(employee);
-                  _insertEmployeeToTable(empRow);
-            }
+    static _getFormFields() {
 
-            printEmployees(empsArray) {
-                  empsArray.forEach(emp => instance.printEmployee(emp));
-            }
+        // Takes fields values
+        let fields = {};
 
-            static _insertEmployeeToTable(empRow) {
+        // Assign each form val to the employee obj
+        UiIds.forEach(fName => fields[fName] = $(`#${fName}`).val());
 
-                  $(UiPath.tbody).append(empRow);
-            }
+        return fields;
+    }
 
-            static _generateEmpsTableRow(emp) {
+    static onAddEmployee() {
 
-                  return `<tr><td>${emp.name}</td><td>${emp.salary}</td><td>${emp.company.name}</td><td>${emp.gender}</td></tr>`;
-            }
+        // Gets emp props and clear the form
+        let employee = this._getFormFields();
+        this._clearForm();
 
-            static clearForm(){
+        // Generate ename and omit unneeded props
+        employee.ename = EnameGenerator(employee.name, employee.companyName);
+        employee = _.omit(employee, EnameProps);
 
-            }
+        //Creating the emp as model and printing into the dom
+        employee = CreateEmployee(employee);
+        this.printEmployee(employee);
+    }
+}
 
-      }
+DomController.staticConstructor();

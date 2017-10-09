@@ -7,7 +7,8 @@ export const classes = {
 
 
 export const uiPath = {
-    tbody: "#emps_table tbody"
+    tbody: "#emps_table tbody",
+    addEmpBtn: '#add_emp_btn'
 };
 
 export const enameProps = ['name', 'companyName'];

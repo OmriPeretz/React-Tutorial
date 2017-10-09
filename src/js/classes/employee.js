@@ -1,66 +1,70 @@
 /**
  * Created by tc99585 on 24/09/17.
  */
-/*jshint esversion: 6 */
+
+
+import {classes as Classes} from '../consts';
 
 import {
-	getEnameMembers as GetEnameMembers
+    getEnameMembers as GetEnameMembers
 } from '../utils.js';
 
-const assignEmpToComp = (emp, comp) => {
-
-	if (comp.constructor.name != 'Company' || emp.constructor.name != 'Employee')
-		throw "can't assign emp to comp";
-
-	comp.addEmployee(emp);
-};
 
 export default class Employee {
 
-	constructor(employee) {
+    constructor(employee, company) {
 
-		if (!employee.salary) employee.salary = 5000;
+        if (!employee.salary) employee.salary = 5000;
 
-		Object.assign(this, employee, {
-			_name: GetEnameMembers(employee.ename).empName,
-			_companyName: GetEnameMembers(employee.ename).compName
-		});
+        this.company = company;
 
-	}
-
-	set company(company) {
-
-		if (company.constructor.name != 'Company')
-			throw 'cannot set not company object';
+        Object.assign(this, employee, {
+            _name: GetEnameMembers(employee.ename).empName,
+            _companyName: GetEnameMembers(employee.ename).compName
+        });
+    }
 
 
-		// Creating new ename
-		this.ename = [company.name, this._name].join('.');
+    set company(company) {
 
-		//etting the new comp
-		this._company = company;
+        if (company.constructor.name !== Classes.comp)
+            throw 'cannot set not company object';
 
-		// Assign relation
-		assignEmpToComp(this, company);
-	}
+        if(this.company)
+            this.company.removeEmp(this.ename);
 
-	get company() {
-		return this._company || null;
-	}
 
-	get companyName() {
 
-		return this._companyName;
-	}
+        // Creating new ename
+        this.ename = [company.name, this._name].join('.');
 
-	get name() {
-		return this._name;
-	}
+        // Change the private props
+        this._company = company;
+        this._companyName = company.name;
 
-	set name(name) {
+        // Assign relation
+        company.addEmployee(this);
+    }
 
-		const [compname] = this.ename.split('.');
+    get company() {
+        return this._company;
+    }
 
-		this.ename = [compname, name].join('.');
-	}
+    get companyName() {
+
+        return this._companyName;
+    }
+
+    get name() {
+        return this._name;
+    }
+
+    set name(name) {
+
+        this._name = name;
+
+        const [compName] = this.ename.split('.');
+
+        this.ename = [compName, name].join('.');
+    }
 }

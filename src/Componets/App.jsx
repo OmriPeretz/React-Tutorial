@@ -12,13 +12,14 @@ class App extends React.Component {
     render() {
         let companies = new Companies();
 
-        jsonCompanies.companies.map(comp =>
-            companies.addCompany(new Company(comp)));
+        jsonCompanies.companies.forEach(comp => {
+            companies.push(new Company(comp));
+        });
 
 
         return(
             <div>
-                <CompaniesComp companies={companies.companiesList}/>
+                <CompaniesComp companies={companies}/>
             </div>
         )
     }
