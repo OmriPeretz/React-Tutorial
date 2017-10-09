@@ -1,0 +1,24 @@
+{
+  "companies": [
+    {
+      "name": "elbit",
+      "budget": 50000,
+      "location": "natanya"
+    },
+    {
+      "name": "krusty krab",
+      "budget": 0.999,
+      "location": "bikini bottom"
+    },
+    {
+      "name": "hp",
+      "budget": 90200,
+      "location": "bnei yehuda"
+    },
+    {
+      "name": "mac",
+      "budget": 99999999999,
+      "location": "NY"
+    }
+  ]
+}
