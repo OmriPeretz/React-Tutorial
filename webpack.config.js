@@ -3,7 +3,7 @@ let dirname = __dirname;
 
 module.exports = {
     entry: [
-        `${dirname}/src/js/main.js`
+        `${dirname}/src/main.js`
     ],
     devtool: 'source-map',
     output: {
@@ -13,24 +13,16 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 loader: 'babel-loader',
                 exclude:/(node_modules)/,
                 query:{
-                    presets:['es2015'],
+                    presets:['es2015', 'react'],
                     plugins: [
                         ["babel-plugin-transform-builtin-extend", {
                             globals: ["Array"],
                         }]
                     ]
-                }
-            },
-            {
-                test: /.jsx?$/,
-                loader: 'babel-loader',
-                exclude: /node_modules/,
-                query: {
-                    presets: ['es2015', 'react']
                 }
             },
             {
@@ -41,7 +33,12 @@ module.exports = {
                 test: /\.json$/,
                 loader: 'json-loader'
             },
-
+            {
+                test: /\.(jpe?g|png|gif|svg)$/,
+                loaders: [
+                    'file-loader?hash=sha512&digest=hex&name=[hash].[ext]'
+                ]
+            }
         ]
     },
     plugins: [

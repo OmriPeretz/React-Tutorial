@@ -1,0 +1,58 @@
+[
+  {
+    "_id": "59dccfc4e30e39c71e9963d3",
+    "age": 27,
+    "name": "Fleming Cotton",
+    "gender": "male",
+    "email": "flemingcotton@kangle.com",
+    "password": "1026"
+  },
+  {
+    "_id": "59dccfc47d68a8b635c42082",
+    "age": 33,
+    "name": "Rosemarie Case",
+    "gender": "female",
+    "email": "rosemariecase@kangle.com",
+    "password": "2124"
+  },
+  {
+    "_id": "59dccfc4d3032d1bb2ddec4c",
+    "age": 38,
+    "name": "Edwina Leon",
+    "gender": "female",
+    "email": "edwinaleon@kangle.com",
+    "password": "6364"
+  },
+  {
+    "_id": "59dccfc4876358f451b98bef",
+    "age": 32,
+    "name": "Potts Burnett",
+    "gender": "male",
+    "email": "pottsburnett@kangle.com",
+    "password": "3198"
+  },
+  {
+    "_id": "59dccfc49b0d80342064b9db",
+    "age": 35,
+    "name": "Bishop Osborne",
+    "gender": "male",
+    "email": "bishoposborne@kangle.com",
+    "password": "7142"
+  },
+  {
+    "_id": "59dccfc470d7fef96bdcd49a",
+    "age": 23,
+    "name": "Freida Fox",
+    "gender": "female",
+    "email": "freidafox@kangle.com",
+    "password": "9464"
+  },
+  {
+    "_id": "59dccfc4a2bf4be68fded49f",
+    "age": 22,
+    "name": "Wise Nguyen",
+    "gender": "male",
+    "email": "wisenguyen@kangle.com",
+    "password": "1142"
+  }
+]

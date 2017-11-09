@@ -1,0 +1,14 @@
+[
+  {
+    "_id": 0,
+    "isRead": true,
+    "content": "Happy New Year to All!",
+    "author": "Fleming Cotton"
+  },
+  {
+    "_id": 1,
+    "isRead": true,
+    "content": "Flying to USA tonight :)\ncontact via email only.",
+    "author": "Fleming Cotton"
+  }
+]

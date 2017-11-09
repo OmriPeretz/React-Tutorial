@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import usb from 'usb';
+import App from './componets/app.jsx';
 
-import App from '../Componets/App.jsx';
+//console.log(usb);
 
 ReactDOM.render(
     <App />,
