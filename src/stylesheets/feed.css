@@ -1,3 +1,13 @@
 #feed {
     margin-top: 60px;
+    height: 600px;
+}
+
+.LazyLoad {
+    opacity: 0;
+    /*transition: all 2s ease-in-out;*/
+}
+
+.LazyLoad.is-visible {
+    opacity: 1;
 }

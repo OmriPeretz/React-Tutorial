@@ -6,6 +6,7 @@ import Feed from './feed.jsx'
 import users from '../../public/users.json';
 import posts from '../../public/posts.json';
 
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -20,6 +21,7 @@ class App extends React.Component {
         this.handleLogout = this.handleLogout.bind(this);
         this.handlePost = this.handlePost.bind(this);
         this.handlePostRead = this.handlePostRead.bind(this);
+        this.handlePostDelete = this.handlePostDelete.bind(this);
     }
 
     handleLogin(user) {
@@ -52,6 +54,12 @@ class App extends React.Component {
         this.setState({posts});
     }
 
+    handlePostDelete(_id) {
+        let posts = _.reject(this.state.posts, ['_id', _id]);
+
+        this.setState({posts});
+    }
+
     render() {
         return (
             <div>
@@ -62,6 +70,7 @@ class App extends React.Component {
                         onLogout={this.handleLogout}
                         onPost={this.handlePost}
                         onPostRead={this.handlePostRead}
+                        onPostDelete={this.handlePostDelete}
                     /> :
                     <Login users={this.state.users} loginSucceeded={this.handleLogin} />
                 }

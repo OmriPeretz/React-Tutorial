@@ -15,10 +15,11 @@ class Feeder extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
 
+        // TODO assign ReactDOM.findDOMNode(this.refs.postContent)
         let content = ReactDOM.findDOMNode(this.refs.postContent).value;
         if (content) this.props.onPost(content);
-        ReactDOM.findDOMNode(this.refs.postContent).value = '';
 
+        ReactDOM.findDOMNode(this.refs.postContent).value = '';
     }
 
     render() {
@@ -29,7 +30,8 @@ class Feeder extends React.Component {
                     </Media.Left>
                     <Media.Body>
                         <Form horizontal onSubmit={this.handleSubmit}>
-                            <FormControl ref="postContent" componentClass="textarea" placeholder="what's on your mind?" />
+                            <FormControl ref="postContent" componentClass="textarea"
+                                         placeholder="what's on your mind?"/>
                             <ButtonGroup className="pull-right">
                                 <Button type="submit" id="post"><FontAwesome name="paper-plane"/></Button>
                             </ButtonGroup>

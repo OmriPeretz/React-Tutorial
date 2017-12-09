@@ -12,13 +12,29 @@ class Feed extends React.Component {
         super(props);
 
         this.handleLogout = this.handleLogout.bind(this);
+        this.getPosts = this.getPosts.bind(this);
     }
 
     handleLogout() {
         this.props.onLogout();
     }
 
+    getPosts() {
+        const {username, onPostRead, onPostDelete} = this.props;
+
+        return _.map(this.props.posts, post =>
+            <Post
+                key={post._id}
+                {...post}
+                username={username}
+                onPostRead={onPostRead}
+                onPostDelete={onPostDelete}/>
+        )
+    }
+
     render() {
+        const posts = this.getPosts();
+
         return (
             <div>
                 <Navbar inverse fixedTop={true}>
@@ -32,19 +48,17 @@ class Feed extends React.Component {
                         <Navbar.Text pullRight>
                             {this.props.username}
                             <Navbar.Link href="#" onClick={this.handleLogout}>
-                                {" "}
                                 <FontAwesome name='sign-out'/>
                             </Navbar.Link>
                         </Navbar.Text>
                     </Navbar.Collapse>
                 </Navbar>
+
                 <Grid>
                     <Row className="show-grid">
-                        <Col id='feed' md={4} mdOffset={4}>
-                            <Feeder
-                                onPost={this.props.onPost}
-                            />
-                            {_.map(this.props.posts, post => <Post {...post} onPostRead={this.props.onPostRead}/>)}
+                        <Col id='feed' md={4} mdOffset={4} >
+                            <Feeder onPost={this.props.onPost}/>
+                            {posts}
                         </Col>
                     </Row>
                 </Grid>
